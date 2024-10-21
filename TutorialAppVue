@@ -1,0 +1,70 @@
+<template>
+<h1 class="text-2xl">{{name}}</h1>
+<p v-if="status === 'active'" class="text-green-700">User active</p>
+<p v-else-if="status === 'pending'" class="text-yellow-600">
+User is pending</p>
+<p v-else class="text-red-700">User Inacive</p>
+<button
+ @click="toogleStatus"
+class="mt-3 px-4 py-2 bg-blue-500 textwhite rounded-md"
+>
+Change status
+</button>
+<hr>
+<h3 class="text-xl my-3">Tasks:</h3>
+<ul>
+<li v-for="task in tasks" :key="task" class="flex items-center my-3">
+{{task}}
+<button
+@click="deletTask(index)"
+class="ml-2 px-3 py-1 bg-red-500 text-white rounded-md text-xs"
+>
+x
+</button>
+</li>
+</ul>
+<a :href="link" class="text-blue-600">Link to profile</a>
+<hr>
+<form @submit.prevent="addTask">
+<label for="newTAsk" class="block text-xl my-3">Add New Task:</label>
+<input 
+type="text"
+id="newTask"
+v-model="newTask"
+class="border border-gray-300 rounded-md px-3 py-2 w-full"
+/>
+<button
+type="submit"
+class="mt-3 px-4 py-2 bg-green-500 text-white rounded-md"
+>
+Add Task
+</button>
+</form>
+</template>
+<script setup>
+import {ref} from 'vue';
+
+
+
+const name = ref('Daniel Mwangi')
+  const status = ref('active')
+  const tasks = ref(['Task 1', 'Task 2', 'Task 3'])
+  const link = ref('https://afisystems.co.ke')
+  const newTask = ref('')
+
+
+const toogleStatus = () => {
+status.value = status.value == 'active' ? 'pending' : ( status.value == 'pending' ? 'inactive' : 'active')
+}
+
+const addTask = () => {
+if(newTask.value.trim() !== ''){
+  tasks.value.push(newTask.value)
+  newTask.value = ''
+}
+}
+
+const deletTask = (index) => {
+  tasks.value.splice(index, 1)
+}
+</script>
