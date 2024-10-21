@@ -1,6 +1,6 @@
 # job-portal
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is a simple use of Vue Js with the compoition API to create a job offer webapp.
 
 ## Recommended IDE Setup
 
